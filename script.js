@@ -5,7 +5,7 @@ const getComputerMathChoice = (min, max) => {
 var computerResponse = getComputerMathChoice(1, 3);
 
 /* Conditional statement for choosing rock, paper, scissors */
-const computerSelection = (choice) => {
+const computerSelection = () => {
   if (computerResponse === 1) {
     return "rock";
   } else if (computerResponse === 2) {
@@ -20,19 +20,34 @@ let fullUserAnswer = prompt("What do you choose?");
 let userAnswer = fullUserAnswer.toLowerCase();
 
 /* Stores answer inside a variable */
-let uRock, uPaper, uScissors;
-
-if (userAnswer === "rock") {
-  uRock = userAnswer;
-} else if (userAnswer === "paper") {
-  uPaper = userAnswer;
-} else if (userAnswer === "scissors") {
-  uScissors = userAnswer;
+let playerSelection;
+if (
+  userAnswer === "rock" ||
+  userAnswer === "paper" ||
+  userAnswer === "scissors"
+) {
+  playerSelection = userAnswer;
+} else {
+  console.log("Invalid input. Choose rock, paper or scissors");
 }
 
+/* One round */
 const playRound = (playerSelection, computerSelection) => {
-  if (uRock && paper)
-    if (playerSelection === computerSelection) {
-      console.log("Its a tie!");
-    }
+  if (playerSelection === "rock" && computerSelection === "paper") {
+    console.log("Computer wins! Paper beats rock");
+  } else if (playerSelection === "paper" && computerSelection === "rock") {
+    console.log("You win! Paper beats rock");
+  } else if (playerSelection === "scissors" && computerSelection === "paper") {
+    console.log("You win! Scissors beat paper");
+  } else if (playerSelection === "scissors" && computerSelection === "rock") {
+    console.log("Computer wins! Rock beat scissors");
+  } else if (playerSelection === "rock" && computerSelection === "scissors") {
+    console.log("You win! Rock beat scissors");
+  } else if (playerSelection === "paper" && computerSelection === "scissors") {
+    console.log("Computer wins! Scissors beat paper");
+  } else if (playerSelection === computerSelection) {
+    console.log("Its a tie!");
+  }
 };
+
+playRound(playerSelection, computerSelection());
