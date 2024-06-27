@@ -15,21 +15,30 @@ const computerSelection = () => {
   }
 };
 
+let humanScore = 0;
+let computerScore = 0;
+
 /* One round */
 let stat;
 const playRound = (playerSelection, computerSelection) => {
   if (playerSelection === "rock" && computerSelection === "paper") {
-    stat = "Computer wins! Paper beats rock";
+    stat = "Computer wins this round! Paper beats rock";
+    computerScore ++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    stat = "You win! Paper beats rock";
+    stat = "You win this round! Paper beats rock";
+    humanScore ++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    stat = "You win! Scissors beat paper";
+    stat = "You win this round! Scissors beat paper";
+    humanScore ++;
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    stat = "Computer wins! Rock beat scissors";
+    stat = "Computer wins this round! Rock beat scissors";
+    computerScore ++;
   } else if (playerSelection === "rock" && computerSelection === "scissors") {
-    stat = "You win! Rock beat scissors";
+    stat = "You win this round! Rock beat scissors";
+    humanScore ++;
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    stat = "Computer wins! Scissors beat paper";
+    stat = "Computer wins this round! Scissors beat paper";
+    computerScore ++;
   } else if (playerSelection === computerSelection) {
     stat = "Its a tie!";
   }
@@ -56,6 +65,14 @@ function playGame() {
     let computerChoice = computerSelection();
     playRound(playerSelection, computerChoice);
     console.log(stat);
+    console.log("Score of Computer: ", computerScore);
+    console.log("Your Score: ", humanScore);
+  }
+  if (computerScore < humanScore) {
+    console.log("You are a winner!");
+  } else {
+    console.log("You lost!");
   }
 }
 playGame();
+
