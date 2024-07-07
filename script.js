@@ -18,61 +18,83 @@ const computerSelection = () => {
 let humanScore = 0;
 let computerScore = 0;
 
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+const result = document.querySelector("#result");
+const sta = document.querySelector("#stat");
+const winner = document.querySelector("#winner");
+
 /* One round */
 let stat;
 const playRound = (playerSelection, computerSelection) => {
   if (playerSelection === "rock" && computerSelection === "paper") {
     stat = "Computer wins this round! Paper beats rock";
-    computerScore ++;
+    computerScore++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
     stat = "You win this round! Paper beats rock";
-    humanScore ++;
+    humanScore++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
     stat = "You win this round! Scissors beat paper";
-    humanScore ++;
+    humanScore++;
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
     stat = "Computer wins this round! Rock beat scissors";
-    computerScore ++;
+    computerScore++;
   } else if (playerSelection === "rock" && computerSelection === "scissors") {
     stat = "You win this round! Rock beat scissors";
-    humanScore ++;
+    humanScore++;
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
     stat = "Computer wins this round! Scissors beat paper";
-    computerScore ++;
+    computerScore++;
   } else if (playerSelection === computerSelection) {
     stat = "Its a tie!";
   }
 };
 
-function playGame() {
-  for (let i = 0; i <= 4; i++) {
-    /* Takes inputs and transforms it into all lower case word*/
-    let fullUserAnswer = prompt("What do you choose?");
-    let userAnswer = fullUserAnswer.toLowerCase();
-
-    /* Stores answer inside a variable */
-    let playerSelection;
-    if (
-      userAnswer === "rock" ||
-      userAnswer === "paper" ||
-      userAnswer === "scissors"
-    ) {
-      playerSelection = userAnswer;
-    } else {
-      console.log("Invalid input. Choose rock, paper or scissors");
-    }
-
-    let computerChoice = computerSelection();
-    playRound(playerSelection, computerChoice);
-    console.log(stat);
-    console.log("Score of Computer: ", computerScore);
-    console.log("Your Score: ", humanScore);
+playGame = () => {
+  if (computerScore === 5) {
+    winner.textContent =
+      "Computer won, you lost. Reload the page for another game.";
+  } else if (humanScore === 5) {
+    winner.textContent = "You won! Congrats! Reload the page for another game.";
   }
-  if (computerScore < humanScore) {
-    console.log("You are a winner!");
-  } else {
-    console.log("You lost!");
-  }
-}
-playGame();
+};
 
+rockBtn.addEventListener("click", () => {
+  const playerSelection = "rock";
+  playRound(playerSelection, computerSelection());
+  playGame();
+  if (computerScore === 5 || humanScore === 5) {
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  }
+  result.textContent = `Score is: Computer: ${computerScore} You: ${humanScore}`;
+  sta.textContent = `${stat}`;
+});
+
+paperBtn.addEventListener("click", () => {
+  const playerSelection = "paper";
+  playRound(playerSelection, computerSelection());
+  playGame();
+  if (computerScore === 5 || humanScore === 5) {
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  }
+  result.textContent = `Score is: Computer: ${computerScore} You: ${humanScore}`;
+  sta.textContent = `${stat}`;
+});
+
+scissorsBtn.addEventListener("click", () => {
+  const playerSelection = "scissors";
+  playRound(playerSelection, computerSelection());
+  playGame();
+  if (computerScore === 5 || humanScore === 5) {
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  }
+  result.textContent = `Score is: Computer: ${computerScore} You: ${humanScore}`;
+  sta.textContent = `${stat}`;
+});
